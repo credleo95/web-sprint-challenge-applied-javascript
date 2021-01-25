@@ -40,7 +40,6 @@ const tabsAppender = (selector) => {
   topicsArray.forEach(item => { 
      let tab = Tabs(item)
      tabsContainer.appendChild(tab)
-     
   })
   
       console.log("It's working");
