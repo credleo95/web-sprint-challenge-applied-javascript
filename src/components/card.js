@@ -22,28 +22,30 @@ const Card = (article) => {
   articleCard.classList.add("card");
   const articleHeadline = document.createElement("div");
   articleHeadline.classList.add("headline");
-  articleHeadline.textContent = "placeholder"
+  articleHeadline.textContent = article.headline
   articleCard.appendChild(articleHeadline);
+  articleCard.addEventListener("click", () => {console.log(article.headline)})
 
   const articleAuthor = document.createElement("div");
   articleAuthor.classList.add("author");
   articleCard.appendChild(articleAuthor);
 
   const imageContainer = document.createElement("div");
-  articleAuthor.appendChild(imageContainer);
   imageContainer.classList.add("img-container");
+  articleAuthor.appendChild(imageContainer);
   const authorImage = document.createElement("img");
-  authorImage.src = "##"
-  articleAuthor.appendChild(authorImage);
+  authorImage.src = article.authorPhoto
+  imageContainer.appendChild(authorImage);
 
   const nameAuthor = document.createElement("span");
-  nameAuthor.textContent = "placeholder"
-  articleCard.appendChild(nameAuthor);
+  nameAuthor.textContent = article.authorName
+  articleAuthor.appendChild(nameAuthor);
   
   
   return articleCard
 
 }
+
 
 const cardAppender = (selector) => {
   // TASK 6
@@ -57,22 +59,25 @@ const cardAppender = (selector) => {
   const cardContainer = document.querySelector(selector);
      
   const cardURL = axios.get(`https://lambda-times-api.herokuapp.com/articles`)
-cardURL
+
+  cardURL
 .then( response => {
-   const articleObj = response.data.articles ;
-   articleObj.forEach((item , index) => {
-     console.log(articleObj.item[index]);
+  const articleObj = response.data.articles ; 
+  const articleInfo = Object.values(articleObj)
+   for(let i = 0; i <= articleInfo.length; i++){
+     const array = articleInfo[i];
+     array.forEach((item) => {
+      cardContainer.appendChild(Card(item));
    })
-
-  console.log("It's working!")
+  }
 })
-.catch(error => {
-  console.log("Error:", err)
+.catch( error => {
+  console.log("Error:", err);
 })
-
-const err = "It's not working. Try again."
 }
 
+
+const err = "Something's not working"
 
 
 export { Card, cardAppender }
