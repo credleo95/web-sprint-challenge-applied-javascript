@@ -45,7 +45,7 @@ const tabsAppender = (selector) => {
       console.log("It's working");
   })
 .catch( error => {
-  console.log("Error:", err);
+  console.log("Error:", error);
 })
 console.log(tabsContainer);
 return tabsAppender ;
@@ -54,7 +54,7 @@ const URL = axios.get(`https://lambda-times-api.herokuapp.com/topics`)
 
 
 
-const err = "Something is wrong. Try again."
+// const err = "Something is wrong. Try again."
 
 
 export { Tabs, tabsAppender }

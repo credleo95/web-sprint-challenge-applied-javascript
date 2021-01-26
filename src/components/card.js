@@ -58,26 +58,25 @@ const cardAppender = (selector) => {
   //
   const cardContainer = document.querySelector(selector);
      
-  const cardURL = axios.get(`https://lambda-times-api.herokuapp.com/articles`)
 
-  cardURL
-.then( response => {
-  const articleObj = response.data.articles ; 
-  const articleInfo = Object.values(articleObj)
-   for(let i = 0; i <= articleInfo.length; i++){
-     const array = articleInfo[i];
-     array.forEach((item) => {
-      cardContainer.appendChild(Card(item));
-   })
-  }
-})
-.catch( error => {
-  console.log("Error:", err);
-})
+  axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+    .then( response => {
+      const articleObj = response.data.articles ; 
+      const articleInfo = Object.values(articleObj)
+      for(let i = 0; i <= articleInfo.length; i++){
+        const array = articleInfo[i];
+        array.forEach((item) => {
+          cardContainer.appendChild(Card(item));
+        })
+      }
+    })
+    .catch( error => {
+      console.log("Error:", error);
+    })
 }
 
 
-const err = "Something's not working"
+// const error = "Something's not working"
 
 
 export { Card, cardAppender }
